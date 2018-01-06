@@ -46,12 +46,15 @@ public class View extends JFrame implements ActionListener{
 
         JMenu menu = new JMenu("Действия");
         JMenuItem menuItem = new JMenuItem("Результат");
+        JMenuItem about = new JMenuItem("О программе...");
 
         menuItem.addActionListener(this);
+        about.addActionListener(this);
 
         menu.add(menuItem);
 
         menuBar.add(menu);
+        menuBar.add(about);
         jPanel.add(menuBar, menuLine);
         this.getContentPane().add(menuBar,BorderLayout.NORTH);
 
@@ -91,9 +94,6 @@ public class View extends JFrame implements ActionListener{
         gbs.gridy++;
         gbs.insets = new Insets(0,0,10,40);
         jPanel.add(resultButton, gbs);
-
-
-
 
 
         firstName = new JTextField(15);
@@ -141,12 +141,10 @@ public class View extends JFrame implements ActionListener{
             case "Копировать в буфер":
                 controller.copyToClipboard();
                 break;
+            case "О программе...":
+                break;
 
         }
-        /*if (e.getSource() == resultButton){
-            controller.translate();
-            System.out.println(e.getActionCommand());
-        }*/
     }
 
     public Controller getController() {

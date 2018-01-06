@@ -21,7 +21,7 @@ public class Controller {
         view.setController(controller);
         view.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         view.setSize(500,300);
-        view.setIconImage(Toolkit.getDefaultToolkit().getImage("src/vidi.jpg"));
+        view.setIconImage(Toolkit.getDefaultToolkit().getImage("vidi.jpg"));
         view.initMenuBar();
         view.initTextField();
         view.setVisible(true);
