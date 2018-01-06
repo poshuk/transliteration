@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,6 +9,7 @@ public class Controller {
     private View view;
     private static final Map<Character, String> firstEl = new HashMap<>();
     private static final Map<Character, String> lastEl = new HashMap<>();
+    private boolean isTranslate = false;
 
     public Controller(View view){
         this.view = view;
@@ -73,14 +76,19 @@ public class Controller {
             if (firstName.matches(".*\\d+.*") && !lastName.matches(".*\\d+.*")){
                 JOptionPane.showMessageDialog(view, "А зачем в имя цифры пихать?");
                 view.getFirstName().setText("");
+                setTranslate(false);
+                view.getResultField().setText("");
             } else if (!firstName.matches(".*\\d+.*") && lastName.matches(".*\\d+.*")){
                 JOptionPane.showMessageDialog(view, "А зачем в фамилию цифры пихать?");
                 view.getLastName().setText("");
-
+                setTranslate(false);
+                view.getResultField().setText("");
             } else if (firstName.matches(".*\\d+.*") && lastName.matches(".*\\d+.*")){
                 JOptionPane.showMessageDialog(view, "А зачем в имя и фамилию цифры пихать?");
                 view.getLastName().setText("");
                 view.getFirstName().setText("");
+                setTranslate(false);
+                view.getResultField().setText("");
             } else {
                 StringBuilder sbFirstName = new StringBuilder();
                 StringBuilder sbLastName = new StringBuilder();
@@ -132,20 +140,34 @@ public class Controller {
                 }
 
                 view.getResultField().setText(sbFirstName.toString()+"."+sbLastName.toString());
-
+                setTranslate(true);
             }
-
-
         } else if (!firstName.isEmpty() && lastName.isEmpty()){
             JOptionPane.showMessageDialog(view, "Пропустил фамилию");
+            setTranslate(false);
+            view.getResultField().setText("");
         } else if (firstName.isEmpty() && !lastName.isEmpty()){
             JOptionPane.showMessageDialog(view, "Пропустил имя");
+            setTranslate(false);
+            view.getResultField().setText("");
         } else if (firstName.isEmpty() && lastName.isEmpty()){
             JOptionPane.showMessageDialog(view, "А где же имя и фамилия?");
+            setTranslate(false);
+            view.getResultField().setText("");
         }
-
-
     }
 
+    public void copyToClipboard(){
+        StringSelection clipboard = new StringSelection(view.getResultField().getText());
+        Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clpbrd.setContents(clipboard, null);
+    }
 
+    public boolean isTranslate() {
+        return isTranslate;
+    }
+
+    public void setTranslate(boolean translate) {
+        isTranslate = translate;
+    }
 }

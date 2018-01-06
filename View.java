@@ -87,6 +87,7 @@ public class View extends JFrame implements ActionListener{
         jPanel.add(label2, gbs);
 
         resultButton = new JButton("Выполнить");
+        resultButton.addActionListener(this);
         gbs.gridy++;
         gbs.insets = new Insets(0,0,10,40);
         jPanel.add(resultButton, gbs);
@@ -113,12 +114,14 @@ public class View extends JFrame implements ActionListener{
         jPanel.add(empty3, gbs);
 
         resultField = new JTextField(30);
-        resultButton.addActionListener(this);
+
         gbs.gridy ++;
         gbs.insets = new Insets(0,0,40,40);
         jPanel.add(resultField, gbs);
 
         clipboard = new JButton("Копировать в буфер");
+        clipboard.addActionListener(this);
+        clipboard.setEnabled(controller.isTranslate());
         gbs.gridy++;
         gbs.insets = new Insets(0,0,10,40);
         jPanel.add(clipboard, gbs);
@@ -130,9 +133,20 @@ public class View extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == resultButton){
-            controller.translate();
+        switch (e.getActionCommand()){
+            case "Выполнить":
+                controller.translate();
+                clipboard.setEnabled(controller.isTranslate());
+                break;
+            case "Копировать в буфер":
+                controller.copyToClipboard();
+                break;
+
         }
+        /*if (e.getSource() == resultButton){
+            controller.translate();
+            System.out.println(e.getActionCommand());
+        }*/
     }
 
     public Controller getController() {
