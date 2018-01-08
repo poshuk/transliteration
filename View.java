@@ -3,6 +3,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 public class View extends JFrame implements ActionListener{
     private JPanel jPanel;
@@ -142,6 +144,7 @@ public class View extends JFrame implements ActionListener{
                 controller.copyToClipboard();
                 break;
             case "О программе...":
+                controller.about();
                 break;
 
         }

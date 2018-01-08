@@ -170,4 +170,9 @@ public class Controller {
     public void setTranslate(boolean translate) {
         isTranslate = translate;
     }
+
+    public void about(){
+        new About();
+    }
+
 }
