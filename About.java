@@ -47,7 +47,7 @@ public class About extends JFrame {
         try{
             hostname = InetAddress.getLocalHost().getCanonicalHostName();
         } catch (UnknownHostException e){
-            System.out.println("oops");
+            System.out.println("ooops");
         }
         JLabel hostInfo = new JLabel();
         if (!hostname.equals("")){
