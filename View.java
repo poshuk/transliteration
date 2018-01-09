@@ -146,6 +146,10 @@ public class View extends JFrame implements ActionListener{
             case "О программе...":
                 controller.about();
                 break;
+            case "Результат":
+                controller.translate();
+                clipboard.setEnabled(controller.isTranslate());
+                break;
 
         }
     }
