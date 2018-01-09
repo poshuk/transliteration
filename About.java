@@ -22,7 +22,7 @@ public class About extends JFrame {
         panelAbout.setLayout(new GridBagLayout());
         this.getContentPane().add(panelAbout);
         setText();
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setSize(400, 300);
         setVisible(true);
 
@@ -49,9 +49,11 @@ public class About extends JFrame {
         } catch (UnknownHostException e){
             System.out.println("ooops");
         }
+
+
         JLabel hostInfo = new JLabel();
         if (!hostname.equals("")){
-            hostInfo.setText("Domain name: " + hostname);
+            hostInfo.setText("Domain name: " + hostname.substring(hostname.indexOf(".")+1));
         }
         panelAbout.add(hostInfo, information);
     }
