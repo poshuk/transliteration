@@ -20,7 +20,7 @@ public class Controller {
         Controller controller = new Controller(view);
         view.setController(controller);
         view.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        view.setSize(500,300);
+        view.setSize(700,400);
         view.initMenuBar();
         view.initTextField();
         view.setVisible(true);
