@@ -89,61 +89,31 @@ public class Controller {
                 setTranslate(false);
                 view.getResultField().setText("");
             } else {
-                StringBuilder sbFirstName = new StringBuilder();
-                StringBuilder sbLastName = new StringBuilder();
+                StringBuilder sbFullName = new StringBuilder();
                 String firstN = firstName.toLowerCase().replaceAll("\\p{Punct}*[ь]*", "").replaceAll("зг", "zgh");
                 String lastN = lastName.toLowerCase().replaceAll("\\p{Punct}*[ь]*", "").replaceAll("зг", "zgh");
-                System.out.println(firstN);
-                System.out.println(lastN);
                 String fullName = firstN + "." + lastN;
+                int dot = fullName.indexOf(".")+1;
 
-
-
-
-                int i = 0;
-
-                for (Character c : firstN.toCharArray()) {
-                    if (i == 0 && firstEl.containsKey(c)) {
-                        sbFirstName.append(firstEl.get(c));
-                        i++;
-                    } else if (lastEl.containsKey(c)) {
-                        i++;
-                        sbFirstName.append(lastEl.get(c));
-                    } else if (c == 'z'){
+                for (int i = 0; i < fullName.length(); i++){
+                    if ((i == 0 && firstEl.containsKey(fullName.charAt(i))) || (i==dot && firstEl.containsKey(fullName.charAt(i)))){
+                        sbFullName.append(firstEl.get(fullName.charAt(i)));
+                    } else if (lastEl.containsKey(fullName.charAt(i))){
+                        sbFullName.append(lastEl.get(fullName.charAt(i)));
+                    } else if (fullName.charAt(i) == '.'){
+                        sbFullName.append(fullName.charAt(i));
+                    } else if (fullName.charAt(i) == 'z'){
                         StringBuilder check = new StringBuilder();
-                        check.append(c);
-                        check.append(firstN.charAt(i+1));
-                        check.append(firstN.charAt(i+2));
+                        check.append(fullName.charAt(i));
+                        check.append(fullName.charAt(i+1));
+                        check.append(fullName.charAt(i+2));
                         if (check.toString().equals("zgh")){
-                            sbFirstName.append(check);
-                            i +=2;
+                            sbFullName.append(check);
+                            i+=2;
                         }
-                        i++;
                     }
                 }
-
-                i=0;
-                for (Character c : lastN.toCharArray()) {
-                    if (i == 0 && firstEl.containsKey(c)) {
-                        sbLastName.append(firstEl.get(c));
-                        i++;
-                    } else if (lastEl.containsKey(c)) {
-                        i++;
-                        sbLastName.append(lastEl.get(c));
-                    } else if (c == 'z'){
-                        StringBuilder check1 = new StringBuilder();
-                        check1.append(c);
-                        check1.append(lastN.charAt(i+1));
-                        check1.append(lastN.charAt(i+2));
-                        if (check1.toString().equals("zgh")){
-                            sbLastName.append(check1);
-                            i +=2;
-                        }
-                        i++;
-                    }
-                }
-
-                view.getResultField().setText(sbFirstName.toString()+"."+sbLastName.toString());
+                view.getResultField().setText(sbFullName.toString());
                 setTranslate(true);
             }
         } else if (!firstName.isEmpty() && lastName.isEmpty()){
