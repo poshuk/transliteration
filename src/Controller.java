@@ -21,7 +21,6 @@ public class Controller {
         view.setController(controller);
         view.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         view.setSize(500,300);
-        view.setIconImage(Toolkit.getDefaultToolkit().getImage("vidi.jpg"));
         view.initMenuBar();
         view.initTextField();
         view.setVisible(true);
@@ -92,13 +91,18 @@ public class Controller {
             } else {
                 StringBuilder sbFirstName = new StringBuilder();
                 StringBuilder sbLastName = new StringBuilder();
-                String f = firstName.toLowerCase().replaceAll("\\p{Punct}*[ь]*", "");
-                String l = lastName.toLowerCase().replaceAll("\\p{Punct}*[ь]*", "");
-                String zghFirstName = f.replaceAll("зг", "zgh");
-                String zghLastName = l.replaceAll("зг", "zgh");
+                String firstN = firstName.toLowerCase().replaceAll("\\p{Punct}*[ь]*", "").replaceAll("зг", "zgh");
+                String lastN = lastName.toLowerCase().replaceAll("\\p{Punct}*[ь]*", "").replaceAll("зг", "zgh");
+                System.out.println(firstN);
+                System.out.println(lastN);
+                String fullName = firstN + "." + lastN;
+
+
+
+
                 int i = 0;
 
-                for (Character c : zghFirstName.toCharArray()) {
+                for (Character c : firstN.toCharArray()) {
                     if (i == 0 && firstEl.containsKey(c)) {
                         sbFirstName.append(firstEl.get(c));
                         i++;
@@ -108,8 +112,8 @@ public class Controller {
                     } else if (c == 'z'){
                         StringBuilder check = new StringBuilder();
                         check.append(c);
-                        check.append(zghFirstName.charAt(i+1));
-                        check.append(zghFirstName.charAt(i+2));
+                        check.append(firstN.charAt(i+1));
+                        check.append(firstN.charAt(i+2));
                         if (check.toString().equals("zgh")){
                             sbFirstName.append(check);
                             i +=2;
@@ -119,7 +123,7 @@ public class Controller {
                 }
 
                 i=0;
-                for (Character c : zghLastName.toCharArray()) {
+                for (Character c : lastN.toCharArray()) {
                     if (i == 0 && firstEl.containsKey(c)) {
                         sbLastName.append(firstEl.get(c));
                         i++;
@@ -129,8 +133,8 @@ public class Controller {
                     } else if (c == 'z'){
                         StringBuilder check1 = new StringBuilder();
                         check1.append(c);
-                        check1.append(zghLastName.charAt(i+1));
-                        check1.append(zghLastName.charAt(i+2));
+                        check1.append(lastN.charAt(i+1));
+                        check1.append(lastN.charAt(i+2));
                         if (check1.toString().equals("zgh")){
                             sbLastName.append(check1);
                             i +=2;
