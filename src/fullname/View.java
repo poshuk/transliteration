@@ -1,10 +1,11 @@
+package fullname;
+
+import fullname.Controller;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 public class View extends JFrame implements ActionListener{
     private JPanel jPanel;
@@ -12,6 +13,8 @@ public class View extends JFrame implements ActionListener{
     private JButton resultButton;
     private JTextField firstName;
     private JTextField lastName;
+    private JTextField firstNameEng;
+    private JTextField lastNameEng;
     private JTextField resultField;
     private JButton clipboard;
 
@@ -128,6 +131,17 @@ public class View extends JFrame implements ActionListener{
         gbs.insets = new Insets(0,0,10,40);
         jPanel.add(clipboard, gbs);
 
+        firstNameEng = new JTextField(30);
+        lastNameEng = new JTextField(30);
+        gbs.gridy++;
+        gbs.insets = new Insets(0,0,10,40);
+        jPanel.add(firstNameEng, gbs);
+        gbs.gridy++;
+        gbs.insets = new Insets(0,0,10,40);
+        jPanel.add(lastNameEng, gbs);
+
+
+
     }
 
 
@@ -172,6 +186,14 @@ public class View extends JFrame implements ActionListener{
 
     public JTextField getResultField() {
         return resultField;
+    }
+
+    public JTextField getFirstNameEng() {
+        return firstNameEng;
+    }
+
+    public JTextField getLastNameEng() {
+        return lastNameEng;
     }
 
     public JButton getClipboard() {

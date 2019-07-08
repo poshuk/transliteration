@@ -1,3 +1,5 @@
+package fullname;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -91,6 +93,8 @@ public class Controller {
             } else {
                 StringBuilder sbFullName = new StringBuilder();
                 String firstN = firstName.toLowerCase().replaceAll("\\p{Punct}*[ь]*", "").replaceAll("зг", "zgh");
+                //String firstNa = firstName.toLowerCase().replaceAll("\\p{Punct}*[ь]*", "").replaceAll("зг", "zgh").substring(0,1);
+
                 String lastN = lastName.toLowerCase().replaceAll("\\p{Punct}*[ь]*", "").replaceAll("зг", "zgh");
                 String fullName = firstN + "." + lastN;
                 int dot = fullName.indexOf(".")+1;
@@ -113,7 +117,18 @@ public class Controller {
                         }
                     }
                 }
-                view.getResultField().setText(sbFullName.toString());
+                String fullNameEng = sbFullName.toString();
+                String fNE = fullNameEng.split("\\.")[0];
+                String fNEE = fullNameEng.split("\\.")[0].substring(0,1);
+                String firstNameE = fNE.substring(0,1).toUpperCase()+fNE.substring(1).toLowerCase();
+                System.out.println(fNE);
+                String lNE = fullNameEng.split("\\.")[1];
+                String lastNameE = lNE.substring(0,1).toUpperCase()+lNE.substring(1).toLowerCase();
+                System.out.println(lNE);
+                view.getFirstNameEng().setText(firstNameE);
+                view.getLastNameEng().setText(lastNameE);
+                view.getResultField().setText(fNEE+"."+lNE/*sbFullName.toString()*/);
+                //view.getResultField().setText(fullNameEng/*sbFullName.toString()*/);
                 setTranslate(true);
             }
         } else if (!firstName.isEmpty() && lastName.isEmpty()){

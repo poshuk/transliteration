@@ -1,3 +1,5 @@
+package fullname;
+
 import javax.swing.*;
 import java.awt.*;
 import java.net.InetAddress;
