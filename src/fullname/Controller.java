@@ -22,7 +22,7 @@ public class Controller {
         Controller controller = new Controller(view);
         view.setController(controller);
         view.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        view.setSize(700,400);
+        view.setSize(1000,500);
         view.initMenuBar();
         view.initTextField();
         view.setVisible(true);
@@ -150,6 +150,10 @@ public class Controller {
         StringSelection clipboard = new StringSelection(view.getResultField().getText());
         Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
         clpbrd.setContents(clipboard, null);
+
+        /*StringSelection clipboardFirstN = new StringSelection(view.getFirstNameEng().getText());
+        Clipboard clpbrdFirstN = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clpbrdFirstN.setContents(clipboardFirstN, null);*/
     }
 
     public boolean isTranslate() {

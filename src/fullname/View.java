@@ -1,7 +1,5 @@
 package fullname;
 
-import fullname.Controller;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,7 +14,9 @@ public class View extends JFrame implements ActionListener{
     private JTextField firstNameEng;
     private JTextField lastNameEng;
     private JTextField resultField;
-    private JButton clipboard;
+    private JButton clipboardLogin;
+    private JButton clipboardFirstName;
+    private JButton clipboardLastName;
 
 
     public View(){
@@ -74,12 +74,12 @@ public class View extends JFrame implements ActionListener{
         gbs.insets = new Insets(0,0,10,40);
 
 
-        JLabel label = new JLabel("Имя");
-        jPanel.add(label, gbs);
+        JLabel firstNLabel = new JLabel("Имя");
+        jPanel.add(firstNLabel, gbs);
 
-        JLabel label1 = new JLabel("Фамилия");
+        JLabel lastNLabel = new JLabel("Фамилия");
         gbs.gridy++;
-        jPanel.add(label1, gbs);
+        jPanel.add(lastNLabel, gbs);
 
         JLabel empty = new JLabel();
         gbs.gridy ++;
@@ -89,16 +89,19 @@ public class View extends JFrame implements ActionListener{
         gbs.gridy ++;
         jPanel.add(empty2, gbs);
 
-        JLabel label2 = new JLabel("Результат");
-        gbs.gridy ++;
-        gbs.insets = new Insets(0,0,40,40);
-        jPanel.add(label2, gbs);
-
-        resultButton = new JButton("Выполнить");
-        resultButton.addActionListener(this);
+        JLabel loginLabel = new JLabel("Login");
         gbs.gridy++;
-        gbs.insets = new Insets(0,0,10,40);
-        jPanel.add(resultButton, gbs);
+        jPanel.add(loginLabel, gbs);
+
+        JLabel firstNResLabel = new JLabel("First name");
+        gbs.gridy++;
+        jPanel.add(firstNResLabel, gbs);
+
+        JLabel lastNResLabel = new JLabel("Last name");
+        gbs.gridy++;
+        jPanel.add(lastNResLabel, gbs);
+
+
 
 
         firstName = new JTextField(15);
@@ -107,7 +110,8 @@ public class View extends JFrame implements ActionListener{
         jPanel.add(firstName, gbs);
 
         lastName = new JTextField(15);
-        gbs.gridy ++;
+        gbs.gridy++;
+        gbs.insets = new Insets(0,0,10,40);
         jPanel.add(lastName, gbs);
 
         JLabel empty1 = new JLabel();
@@ -119,17 +123,11 @@ public class View extends JFrame implements ActionListener{
         jPanel.add(empty3, gbs);
 
         resultField = new JTextField(30);
-
         gbs.gridy ++;
-        gbs.insets = new Insets(0,0,40,40);
+        gbs.insets = new Insets(0,0,10,40);
         jPanel.add(resultField, gbs);
 
-        clipboard = new JButton("Копировать в буфер");
-        clipboard.addActionListener(this);
-        clipboard.setEnabled(controller.isTranslate());
-        gbs.gridy++;
-        gbs.insets = new Insets(0,0,10,40);
-        jPanel.add(clipboard, gbs);
+
 
         firstNameEng = new JTextField(30);
         lastNameEng = new JTextField(30);
@@ -142,6 +140,33 @@ public class View extends JFrame implements ActionListener{
 
 
 
+        gbs.gridx = 2;
+        gbs.gridy = 0;
+
+
+
+
+        resultButton = new JButton("Выполнить");
+        resultButton.addActionListener(this);
+        //gbs.gridy++;
+        gbs.insets = new Insets(0,0,0,40);
+        jPanel.add(resultButton, gbs);
+
+        clipboardLogin = new JButton("Копировать логин");
+        clipboardLogin.addActionListener(this);
+        clipboardLogin.setEnabled(controller.isTranslate());
+        //gbs.gridy++;
+        gbs.gridy=4;
+        gbs.insets = new Insets(0,0,10,40);
+        jPanel.add(clipboardLogin, gbs);
+
+        /*clipboardFirstName = new JButton("Копировать Имя");
+        clipboardFirstName.addActionListener(this);
+        clipboardFirstName.setEnabled(controller.isTranslate());
+        gbs.gridy=5;
+        gbs.insets = new Insets(0,0,10,40);
+        jPanel.add(clipboardFirstName, gbs);*/
+
     }
 
 
@@ -152,7 +177,8 @@ public class View extends JFrame implements ActionListener{
         switch (e.getActionCommand()){
             case "Выполнить":
                 controller.translate();
-                clipboard.setEnabled(controller.isTranslate());
+                clipboardLogin.setEnabled(controller.isTranslate());
+                //clipboardFirstName.setEnabled(controller.isTranslate());
                 break;
             case "Копировать в буфер":
                 controller.copyToClipboard();
@@ -162,7 +188,7 @@ public class View extends JFrame implements ActionListener{
                 break;
             case "Результат":
                 controller.translate();
-                clipboard.setEnabled(controller.isTranslate());
+                clipboardLogin.setEnabled(controller.isTranslate());
                 break;
 
         }
@@ -196,7 +222,7 @@ public class View extends JFrame implements ActionListener{
         return lastNameEng;
     }
 
-    public JButton getClipboard() {
-        return clipboard;
+    public JButton getClipboardLogin() {
+        return clipboardLogin;
     }
 }
